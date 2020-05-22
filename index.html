@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="A simple timer for running your exams.">
+    <title>EXAMTIMER</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="title_container">
+            <input type="text" id="course_title" name="course_title" maxlength="20" placeholder="Course Title" spellcheck="false" autofocus="true">
+        </div>
+        <div class="clock_container">
+            <div class="clock_text">
+                <input type="number" name="hours" class="number" id="hours" maxlength="2" placeholder="00" min="0" max="23">
+                <span class="unit">h</span>
+                <span class="colon">:</span>
+                <input type="number" name="minutes" class="number" id="minutes" maxlength="2" placeholder="00" min="0" max="60">
+                <span class="unit">m</span>
+                <span class="colon">:</span>
+                <input type="number" name="seconds" class="number" id="seconds" maxlength="2" placeholder="00" min="0" max="60">
+                <span class="unit">s</span>
+            </div>
+        </div>
+        <div class="announcement_container">
+            <textarea id="announcement" name="announcement" rows="5" cols="33" placeholder="Enter your announcement..." spellcheck="true"></textarea>
+        </div>
+    </div>
+</body></html>

@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Passion+One|Heebo|Poiret+One|Didact+Gothic|Rajdhani');
+
+html {
+    scroll-behavior: smooth;
+
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: Roboto;
+    font-weight: bold;
+}
+
+.wrapper {
+    position: relative;
+    width: calc(100% - 40px);
+    margin: 20px;
+
+
+}
+
+.title_container {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.title_container #course_title {
+    position: relative;
+    box-sizing: border-box;
+    border: none;
+    padding: 5px 20px;
+    font-size: 1.1em;
+    text-align: center;
+    transition: 0.2s all;
+    outline: 0;
+    border-bottom: 1px solid rgba(0, 0, 255, 0.2);
+    text-transform: uppercase;
+}
+
+
+#course_title:hover {
+    cursor: pointer;
+}
+
+#course_title::placeholder {
+    opacity: .5;
+
+}
+
+#course_title:focus {
+    border-color: rgba(0, 0, 255, 0.8);
+}
+
+
+
+.clock_container input {
+    font-size: 1em;
+    outline: none;
+    border: none;
+    width: 1.5em;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+input[type=number]::-webkit-outer-spin-button {
+    border-radius: 20px;
+}
+
+.clock_container .clock_text {
+    font-size: 8em;
+    text-align: center;
+    margin: 50px auto;
+/*    to align clock vertically */
+    margin-left: 30px; 
+}
+
+.announcement_container {
+    width: 100%;
+}
+
+#announcement {
+    width: 100%;
+    font-size: 2em;
+    min-height: 5em;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 255, 0.2);
+    cursor: pointer;
+}
+
+#anouncement:focus {
+    border-bottom: 5px solid rgba(0, 0, 255, 0.8);
+}
+
+
+.unit {
+    position: relative;
+    font-size: .2em;
+    height: 100%;
+    color: gray;
+    margin-left: 10px
+}
+
+.colon {
+    margin: 0 20px;
+}

@@ -7,6 +7,7 @@
     <title>EXAMTIMER</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/1e93430c9c.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="script.js"></script>
 </head>
@@ -14,18 +15,28 @@
 <body>
     <div class="wrapper">
         <div class="title_container">
-            <input type="text" id="course_title" name="course_title" maxlength="20" placeholder="Course Title" spellcheck="false" autofocus="true">
+            <input type="text" id="course_title" name="course_title" maxlength="200" placeholder="Course Title" spellcheck="false" autofocus="true">
         </div>
         <div class="clock_container">
             <div class="clock_text">
-                <input type="number" name="hours" class="number" id="hours" maxlength="2" placeholder="00" min="0" max="23">
-                <span class="unit">h</span>
+                <input type="number" name="hours" class="number" id="hours" maxlength="2" placeholder="hh" min="0" max="24">
+<!--                <span class="unit">h</span>-->
                 <span class="colon">:</span>
-                <input type="number" name="minutes" class="number" id="minutes" maxlength="2" placeholder="00" min="0" max="60">
-                <span class="unit">m</span>
+                <input type="number" name="minutes" class="number" id="minutes" maxlength="2" placeholder="mm" min="0" max="60">
+<!--                <span class="unit">m</span>-->
                 <span class="colon">:</span>
-                <input type="number" name="seconds" class="number" id="seconds" maxlength="2" placeholder="00" min="0" max="60">
-                <span class="unit">s</span>
+                <input type="number" name="seconds" class="number" id="seconds" maxlength="2" placeholder="ss" min="0" max="60">
+<!--                <span class="unit">s</span>-->
+            </div>
+            <div class="clock_controls">
+                <div class="startpause">
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-pause"></i>
+                </div>
+                <div class="stopclear">
+                    <i class="fas fa-stop"></i>
+                    <i class="fas fa-times"></i>
+                </div>
             </div>
         </div>
         <div class="announcement_container">

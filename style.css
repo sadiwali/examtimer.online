@@ -16,13 +16,13 @@ body {
 }
 
 .wrapper {
-    position: relative;
+    position: fixed;
     width: calc(100% - 40px);
+    height: calc(100% - 40px);
     margin: 20px;
-
-
 }
 
+/* Title */
 .title_container {
     position: relative;
     text-align: center;
@@ -32,9 +32,10 @@ body {
 .title_container #course_title {
     position: relative;
     box-sizing: border-box;
+    width: 200px;
     border: none;
-    padding: 5px 20px;
-    font-size: 1.1em;
+    padding: 5px 0;
+    font-size: 1.5em;
     text-align: center;
     transition: 0.2s all;
     outline: 0;
@@ -49,29 +50,35 @@ body {
 
 #course_title::placeholder {
     opacity: .5;
-
 }
 
 #course_title:focus {
     border-color: rgba(0, 0, 255, 0.8);
 }
 
-
+/* Clock */
+.clock_container {
+    position: absolute;
+    left: 50%;
+    top: 33%;
+    transform: translate(-50%, -33%);
+    width: 100%;
+    opacity: 1;
+}
 
 .clock_container input {
     font-size: 1em;
     outline: none;
     border: none;
-    width: 1.5em;
-    text-align: right;
+    width: 2em;
     margin: 0;
     padding: 0;
-    
+    text-align: center;
 }
 
 input[type=number]::-webkit-inner-spin-button {
     cursor: pointer;
-    padding: 0 10px;
+    padding: 0 .2vw;
 }
 
 input[type=number]::-webkit-outer-spin-button {
@@ -79,40 +86,127 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .clock_container .clock_text {
-    font-size: 8em;
+    font-size: 8vw;
     text-align: center;
-    margin: 50px auto;
-/*    to align clock vertically */
-    margin-left: 30px; 
 }
 
+/* Clock controls */
+
+.clock_controls {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+    display: flex;
+    width: 400px;
+    height: 100px;
+}
+
+.clock_controls .startpause {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    height: 3em;
+    width: 3em;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.2s all ease-out;
+    padding: 10px;
+    background-color: #efefef;
+}
+
+.clock_controls .fas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 2em;
+}
+
+.clock_controls .startpause .fa-play {
+    display: block;
+    transform: translate(-40%, -50%)
+}
+
+.clock_controls .startpause .fa-pause {
+    display: none;
+    transform: translate(-50%, -50%);
+}
+
+.clock_controls .startpause:hover {
+    background-color: #dedede;
+}
+
+/* stop clear*/
+.clock_controls .stopclear {
+    position: absolute;
+    top: 50%;
+    right: 4em;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    height: 1em;
+    width: 1em;
+    border-radius: 25%;
+    opacity: 0;
+    padding: 10px;
+    transition: 0.2s all ease-out;
+    background-color: #efefef;
+}
+
+
+.clock_controls .stopclear:hover {
+    background-color: #dedede;
+
+}
+
+.clock_controls .stopclear .fas {
+    transform: translate(-50%, -50%);
+    font-size: 1em;
+}
+
+.clock_controls .stopclear .fa-stop {
+    display: block;
+}
+
+.clock_controls .stopclear .fa-times {
+    display: block;
+}
+
+.unit {
+    position: absolute;
+    transform: translate(-200%, 60%);
+    font-size: .2em;
+    height: 100%;
+    opacity: .2;
+    margin-left: 10px;
+}
+
+.colon {
+    color: gray;
+}
+
+/* Announcement */
 .announcement_container {
-    width: 100%;
+    width: calc(100% - 40px);
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    margin: 20px;
 }
 
 #announcement {
+    position: relative;
     width: 100%;
     font-size: 2em;
     min-height: 5em;
+    line-height: 1em;
     outline: none;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 255, 0.2);
     cursor: pointer;
 }
 
-#anouncement:focus {
-    border-bottom: 5px solid rgba(0, 0, 255, 0.8);
-}
-
-
-.unit {
-    position: relative;
-    font-size: .2em;
-    height: 100%;
-    color: gray;
-    margin-left: 10px
-}
-
-.colon {
-    margin: 0 20px;
+#announcement:focus {
+    border-color: rgba(0, 0, 255, 0.8);
 }

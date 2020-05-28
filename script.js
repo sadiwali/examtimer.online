@@ -1,5 +1,4 @@
 var title_first_width = 0;
-var title_width = 0;
 var DEBUG = false;
 var playstate = 0; // 0 means initial, 1 means playing, 2 means paused, 3 means stopped, 4 means completed
 var set_time = 0; // the time set by user
@@ -8,7 +7,13 @@ var timer = null; // the clock timer
 var display_timer = null; // the display timer for updating clock
 var first_run = true;
 var prev_announcement_placeholder = ""; // save the announcement placeholder
+
+var second_progress = 0; // for keeping track of partial timer progress
+var UPDATE_MS = 100; // the timer is updated this number of ms
+
+
 $(document).ready(() => {
+    // get the initial title width
     if ($("#course_title").length) {
         title_first_width = parseInt($("#course_title").css("width"), 10);
     }
@@ -18,46 +23,33 @@ $(document).ready(() => {
         if (key.charCode < 48 || key.charCode > 57) return false;
     })
     // prevent overflow
-    $(".number").on('blur', (e) => {
-        var myval = parseInt(e.target.value, 10);
-        var mymax = parseInt(e.target.max, 10);
-
-        if (myval >= mymax) {
-            e.target.value = e.target.max;
-        }
+    $(".number").on('blur', function (e) {
+        if (parseInt(e.target.value, 10) >= parseInt(e.target.max, 10)) e.target.value = e.target.max;
     });
     // prevent more than 2 digits
-    $(".number").on('input', (e) => {
+    $(".number").on('input', function (e) {
         if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
-
         increment_input($(e.target), true);
-        if (is_input_zero()) {
-            console.log("is less");
-            // nothing exists. hide button
-            $(".startpause").css("opacity", "0");
-        } else {
-            // something exists, show button
-            $(".startpause").css("opacity", "1");
-        }
+        // hide or show the play/pause button based on input or lack thereof
+        if (is_input_zero()) $(".startpause").css("opacity", "0");
+        else $(".startpause").css("opacity", "1");
     });
 
 
     // hide title placeholder when in focus
-    $("#course_title").on('focus', (e) => {
+    $("#course_title").on('focus', function (e) {
         e.target.placeholder = "";
     });
+
     $("#course_title").on('blur', (e) => {
         e.target.placeholder = "Course title";
         // set width
-        if (e.target.value.length == 0) {
-            $(e.target).css("width", title_first_width + "px")
-        }
+        if (e.target.value.length == 0) $(e.target).css("width", title_first_width + "px")
+
     });
     // set the title input width
     $("#course_title").on('input', (e) => {
-        var pix_length = (e.target.value.length + 1) * (e.target.size - 4) + "px";
-        title_width = pix_length;
-        $(e.target).css("width", pix_length);
+        $(e.target).css("width", (e.target.value.length + 1) * (e.target.size - 4) + "px");
     });
 
     $("#announcement").on('input', function (e) {
@@ -71,20 +63,15 @@ $(document).ready(() => {
             // if initial, paused, or stopped, start playing
             set_playstate(1);
             update_clock();
-
         } else if (playstate == 1) {
             // was playing, now pause
             set_playstate(2);
-
         } else if (playstate == 4) {
             // restart timer
             current_time = set_time;
             update_clock();
             set_playstate(1);
-
         }
-        // do action with the new playstate
-        // parse_playstate(playstate);
     });
 
     $(".stopclear").on("mouseup", function () {
@@ -98,15 +85,11 @@ $(document).ready(() => {
             set_playstate(0);
             $(".stopclear").css("opacity", "0");
         }
-
-        // do action with the new playstate
-        //parse_playstate(playstate);
     });
 
     $(".moretime").on("mousedown", function () {
         moretime_expand();
     });
-
 
 });
 
@@ -114,16 +97,8 @@ function moretime_expand() {
 
 }
 
-
-
 function is_input_zero() {
-    var h = parseInt($("#hours").val(), 10);
-    var m = parseInt($("#minutes").val(), 10);
-    var s = parseInt($("#seconds").val(), 10);
-    if (!h) h = 0;
-    if (!m) m = 0;
-    if (!s) s = 0;
-    return (h + m + s) == 0;
+    return get_clock_time() == 0;
 }
 
 function get_clock_time() {
@@ -135,9 +110,6 @@ function get_clock_time() {
     if (!s) s = 0;
     return milliseconds(h, m, s);
 }
-
-var second_progress = 0;
-var UPDATE_MS = 100;
 
 function set_playstate(new_playstate) {
     playstate = new_playstate; // set the global playstate
@@ -156,9 +128,8 @@ function set_playstate(new_playstate) {
         // hide the clear stop
         $(".stopclear").css("opacity", "0");
         var millis = get_clock_time();
-        if (millis == 0) {
-            return;
-        }
+        if (millis == 0) return;
+
         // if running for the first time, remember first set time
         if (first_run) {
             set_time = millis
@@ -174,12 +145,9 @@ function set_playstate(new_playstate) {
         timer = setInterval(function () {
             // decrement current time every 1 
             if (playstate == 1) {
-
                 current_time -= UPDATE_MS;
-
                 if (second_progress >= 1000) second_progress = 0;
                 second_progress += UPDATE_MS
-
                 if (current_time <= 0) set_playstate(4);
             }
         }, 100);
@@ -188,9 +156,8 @@ function set_playstate(new_playstate) {
             set_clock(current_time);
         }, 1000);
         // if announcements are empty, hide the section
-        if ($("#announcement")[0].value.length == 0) {
-            show_announcement_placeholder(false);
-        }
+        if ($("#announcement")[0].value.length == 0) show_announcement_placeholder(false);
+
 
     } else if (new_playstate == 2) {
         // paused state
@@ -265,7 +232,6 @@ function set_clock(ms) {
     $("#hours").val(h);
     $("#minutes").val(m);
     $("#seconds").val(s);
-
 }
 
 function milliseconds(h, m, s) {
@@ -297,18 +263,14 @@ function increment_input(which, clicked) {
         $(which).val("0");
         // increment next numbers
         if ($(which).attr("id") == "seconds") {
-            console.log("seconds");
             // check minutes and hours
             increment_input($("#minutes"), false);
         } else if ($(which).attr("id") == "minutes") {
-            console.log("minutes");
             increment_input($("#hours"), false);
             // check hours only
         } else if ($(which).attr('id') == "hours") {
             $("#hours").val(parseInt($("#hours").attr("max"), 10) - 1);
-
         } else {
-            console.log("which clause");
             console.log($(which).attr("id"));
         }
 

@@ -83,7 +83,6 @@ $(document).ready(() => {
         } else if (playstate == 3 || playstate == 4) {
             // stopped already, reset to initial
             set_playstate(0);
-            $(".stopclear").css("opacity", "0");
         }
     });
 
@@ -113,11 +112,18 @@ function get_clock_time() {
 
 function set_playstate(new_playstate) {
     playstate = new_playstate; // set the global playstate
+    $(".clock_container .clock_text input").css("animation", "none");
     if (new_playstate == 0) {
         // initial state
         $(".number").val("");
         current_time = 0;
         set_time = 0;
+        $(".stopclear").css("opacity", "0");
+        $(".startpause").css("opacity", "0");
+        $(".startpause > .fa-play").css("display", "block");
+        $(".startpause > .fa-pause").css("display", "none");
+        $(".startpause > .fa-undo-alt").css("display", "none");
+
         show_announcement_placeholder(true);
     } else if (new_playstate == 1) {
         // playing state
@@ -190,6 +196,8 @@ function set_playstate(new_playstate) {
         clearInterval(timer);
         clearInterval(display_timer);
         update_clock();
+        second_progress = 0;
+        $(".clock_container .clock_text input").css("animation", "flashred 0.5s running both linear infinite alternate");
 
         $(".startpause > .fa-play").css("display", "none");
         $(".startpause > .fa-pause").css("display", "none");

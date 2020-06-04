@@ -90,6 +90,10 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: center;
 }
 
+.clock_container .clock_text input {
+    //animation: flashred 0.5s running both linear infinite alternate;
+}
+
 /* Clock controls */
 
 .clock_controls {
@@ -192,7 +196,7 @@ input[type=number]::-webkit-outer-spin-button {
     width: 150px;
     right: -7.5px;
 
-/*    transform: translate(calc(-50% + 67px), -50%);*/
+    /*    transform: translate(calc(-50% + 67px), -50%);*/
 
 }
 
@@ -202,6 +206,7 @@ input[type=number]::-webkit-outer-spin-button {
 .moretime .plusbtn:hover.plusbtn p {
     opacity: 1;
 }
+
 .moretime .plusbtn .fa-plus {
     transition: 0.2s all ease-out;
     position: absolute;
@@ -255,6 +260,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .colon {
     color: gray;
+
 }
 
 /* Announcement */
@@ -280,4 +286,14 @@ input[type=number]::-webkit-outer-spin-button {
 
 #announcement:focus {
     border-color: rgba(0, 0, 255, 0.8);
+}
+
+@keyframes flashred {
+    from {
+        color: inherit;
+    }
+
+    to {
+        color: red;
+    }
 }
